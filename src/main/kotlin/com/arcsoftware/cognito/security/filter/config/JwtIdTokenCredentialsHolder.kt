@@ -1,6 +1,7 @@
 package com.arcsoftware.cognito.security.filter.config
 
 
-data class JwtIdTokenCredentialsHolder(
+
+open class JwtIdTokenCredentialsHolder(
     var idToken: String? = null
 )

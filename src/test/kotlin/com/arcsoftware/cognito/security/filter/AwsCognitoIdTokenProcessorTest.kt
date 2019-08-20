@@ -115,6 +115,13 @@ class AwsCognitoIdTokenProcessorTest {
         awsCognitoIdTokenProcessor!!.getAuthentication(request)
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun whenUserHasNoRoles() {
+        request.addHeader("Authorization", newJwtToken(KNOWN_KID, "norole").serialize())
+        val authentication = awsCognitoIdTokenProcessor.getAuthentication(request)
+        assertThat(authentication?.isAuthenticated).isTrue()
+    }
 
     protected fun setupJwkResource(assetResponse: String) {
         wireMockRule.stubFor(get(urlEqualTo("/.well-known/jwks.json"))

@@ -16,6 +16,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Scope
+import org.springframework.context.annotation.ScopedProxyMode
 import java.net.MalformedURLException
 import java.net.URL
 
@@ -39,7 +41,7 @@ class JwtAutoConfiguration {
     private val jwtConfiguration: JwtConfiguration? = null
 
     @Bean
-//    @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
     fun awsCognitoCredentialsHolder(): JwtIdTokenCredentialsHolder {
         return JwtIdTokenCredentialsHolder()
     }

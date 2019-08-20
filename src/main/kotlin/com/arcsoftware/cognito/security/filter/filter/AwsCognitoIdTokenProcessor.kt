@@ -43,11 +43,10 @@ class AwsCognitoIdTokenProcessor {
             val username = claimsSet.claims[jwtConfiguration.userNameField]?.toString()
 
             if (username != null) {
-
-                val groups = claimsSet.claims[jwtConfiguration.groupsField] as List<String>
-                val grantedAuthorities = groups.map {
+                val groups = claimsSet.claims[jwtConfiguration.groupsField]?.let { it as List<String> }
+                val grantedAuthorities = groups?.map {
                     SimpleGrantedAuthority(ROLE_PREFIX + it.toUpperCase())
-                }
+                } ?: emptyList()
                 val user = User(username, EMPTY_PWD, grantedAuthorities)
 
                 jwtIdTokenCredentialsHolder!!.idToken = stripBearerToken(idToken)
