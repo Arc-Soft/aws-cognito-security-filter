@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.ixortalk.aws.cognito.boot.config.JwtAutoConfiguration
+com.arcsoftware.cognito.security.filter.config.JwtAutoConfiguration
